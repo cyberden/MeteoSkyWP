@@ -1,0 +1,196 @@
+﻿<common:BasePage
+  x:Class="MeteoSkyWP.SkiPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:MeteoSkyWP"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:common="using:MeteoSkyWP.Common"
+  xmlns:tools="using:MeteoSkyWP.Tools"
+  mc:Ignorable="d"
+  DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+  <Grid Margin="10, 15, 10, 0">
+    <Grid.RowDefinitions>
+      <RowDefinition
+        Height="Auto" />
+      <RowDefinition
+        Height="Auto" />
+      <RowDefinition
+        Height="Auto" />
+      <RowDefinition
+        Height="*" />
+    </Grid.RowDefinitions>
+
+    <TextBlock
+      Style="{ThemeResource TitleTextBlockStyle}"
+      Text="MeteoSkyWP" />
+
+    <TextBlock
+      Grid.Row="1"
+      Style="{ThemeResource HeaderTextBlockStyle}"
+      Text="Enneigement" />
+
+    <ComboBox
+      Grid.Row="2"
+      x:Name="DepartmentCbox"
+      ItemsSource="{Binding Observations}"
+      SelectedItem="{Binding CurrentSelectedElement, Mode=TwoWay}"
+      DisplayMemberPath="Department" />
+
+    <ListView
+      Grid.Row="3"
+      x:Name="LayoutRoot"
+      DataContext="{Binding CurrentSelectedElement}"
+      ItemsSource="{Binding Stations}"
+      IsItemClickEnabled="true"
+      ItemClick="StationLstItemClicked">
+      <ListView.HeaderTemplate>
+        <DataTemplate>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition
+                Width="48" />
+              <ColumnDefinition
+                Width="*" />
+              <ColumnDefinition
+                Width="50" />
+              <ColumnDefinition
+                Width="55" />
+              <ColumnDefinition
+                Width="45" />
+              <ColumnDefinition
+                Width="45" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+              Grid.Column="0"
+              Margin="5"
+              Text="Date"
+              TextWrapping="Wrap"
+              Style="{ThemeResource BodyTextBlockStyle}"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="1"
+              Margin="5"
+              Text="Station"
+              TextWrapping="Wrap"
+              Style="{ThemeResource BodyTextBlockStyle}"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="2"
+              Margin="5"
+              Text="Alt."
+              TextWrapping="Wrap"
+              Style="{ThemeResource BodyTextBlockStyle}"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="3"
+              Margin="5"
+              Text="Prof."
+              TextWrapping="Wrap"
+              Style="{ThemeResource BodyTextBlockStyle}"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="4"
+              Margin="5"
+              Text="Frai."
+              TextWrapping="Wrap"
+              Style="{ThemeResource BodyTextBlockStyle}"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="5"
+              Margin="5"
+              Text="°C"
+              TextWrapping="Wrap"
+              Style="{ThemeResource BodyTextBlockStyle}"
+              HorizontalAlignment="Left"/>
+          </Grid>
+        </DataTemplate>
+      </ListView.HeaderTemplate>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition
+                Width="48" />
+              <ColumnDefinition
+                Width="*" />
+              <ColumnDefinition
+                Width="50" />
+              <ColumnDefinition
+                Width="55" />
+              <ColumnDefinition
+                Width="45" />
+              <ColumnDefinition
+                Width="45" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+              Grid.Column="0"
+              Margin="5"
+              Text="{Binding ReportDateStr }"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="1"
+              Margin="5"
+              Text="{Binding StationName }"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="2"
+              Margin="5"
+              Text="{Binding Height }"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="3"
+              Margin="5"
+              Text="{Binding SnowDepth }"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="4"
+              Margin="5"
+              Text="{Binding FreshSnowDepth }"
+              HorizontalAlignment="Left"/>
+
+            <TextBlock
+              Grid.Column="5"
+              Margin="5"
+              Text="{Binding Temperature }"
+              HorizontalAlignment="Left"/>
+          </Grid>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      <ListView.ItemContainerStyle>
+        <Style
+          TargetType="ListViewItem">
+          <Setter
+            Property="HorizontalContentAlignment"
+            Value="Stretch" />
+        </Style>
+      </ListView.ItemContainerStyle>
+    </ListView>
+  </Grid>
+
+  <Page.BottomAppBar>
+    <CommandBar>
+      <CommandBar.PrimaryCommands>
+        <AppBarButton
+          x:Uid="Home"
+          x:Name="HomeBtn"
+          Command="{Binding GoHomeCommand}"
+          Icon="Home" />
+      </CommandBar.PrimaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+
+</common:BasePage>

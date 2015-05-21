@@ -1,0 +1,256 @@
+﻿<common:BasePage
+  x:Class="MeteoSkyWP.RootPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:MeteoSkyWP"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:common="using:MeteoSkyWP.Common"
+  xmlns:tools="using:MeteoSkyWP.Tools"
+  mc:Ignorable="d"
+  DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <Page.Transitions>
+    <TransitionCollection>
+      <NavigationThemeTransition>
+        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+          <CommonNavigationTransitionInfo
+            IsStaggeringEnabled="True" />
+        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+      </NavigationThemeTransition>
+    </TransitionCollection>
+  </Page.Transitions>
+  
+  <Page.Resources>
+    <tools:IsStringNotNullToVisibilityConverter
+      x:Name="IsStringNotNullToVisibilityConverter" Not="false"/>
+
+    <tools:IsStringNotNullToVisibilityConverter
+      x:Name="NotIsStringNotNullToVisibilityConverter" Not="true" />
+  </Page.Resources>
+
+  <Grid
+    x:Name="LayoutRoot">
+
+    <Pivot
+      CommonNavigationTransitionInfo.IsStaggerElement="True"
+      Title="MeteoSkyWP">
+      <PivotItem
+        x:Name="FirstPivot"
+        Header="cartes">
+        <ScrollViewer>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition
+                Height="Auto" />
+              <RowDefinition
+                Height="Auto" />
+              <RowDefinition
+                Height="Auto" />
+              <RowDefinition
+                Height="Auto" />
+            </Grid.RowDefinitions>
+            <ComboBox
+              x:Name="mapsCombo"
+              ItemsSource="{Binding ObservationsMapsCollections}"
+              DisplayMemberPath="Item1"
+              SelectedValuePath="Item2"
+              IsEnabled="True"
+              SelectedIndex="{Binding MapSelectedIndex, Mode=TwoWay}"
+              SelectionChanged="mapsCombo_SelectionChanged" />
+            <ScrollViewer
+              Grid.Row="1"
+              x:Name="scrl"
+              ZoomMode="Enabled"
+              HorizontalScrollBarVisibility="Visible"
+              VerticalScrollBarVisibility="Visible"
+              MaxZoomFactor="3.0"
+              DoubleTapped="scrl_DoubleTapped">
+              <Grid
+                VerticalAlignment="Top">
+                <Image
+                  VerticalAlignment="Top"
+                  Stretch="Uniform">
+                  <Image.Source>
+                    <BitmapImage
+                      UriSource="{Binding ElementName=mapsCombo, Path=SelectedValue}" />
+                  </Image.Source>
+                </Image>
+                <!--<Canvas
+                  VerticalAlignment="Top">
+                  <Button
+                    Canvas.Left="30"
+                    Canvas.Top="200"
+                    Width="50"
+                    Height="50"
+                    Opacity="0"
+                    Click="Button_Click" />
+                </Canvas>-->
+              </Grid>
+            </ScrollViewer>
+            <ComboBox
+              Grid.Row="2"
+              x:Name="forecastMapsCombo"
+              ItemsSource="{Binding ForecastMapsCollections}"
+              DisplayMemberPath="Item1"
+              SelectedValuePath="Item2"
+              IsEnabled="True"
+              SelectedIndex="{Binding ForecastMapSelectedIndex, Mode=TwoWay}"
+              SelectionChanged="forecastMapsCombo_SelectionChanged" />
+            <ScrollViewer
+              Grid.Row="3"
+              Name="scrl2"
+              ZoomMode="Enabled"
+              HorizontalScrollBarVisibility="Visible"
+              VerticalScrollBarVisibility="Visible"
+              MaxZoomFactor="3.0"
+              DoubleTapped="scrl2_DoubleTapped">
+              <Grid
+                VerticalAlignment="Top">
+                <Image
+                  VerticalAlignment="Top"
+                  Stretch="Uniform">
+                  <Image.Source>
+                    <BitmapImage
+                      UriSource="{Binding ElementName=forecastMapsCombo, Path=SelectedValue}" />
+                  </Image.Source>
+                </Image>
+              </Grid>
+            </ScrollViewer>
+          </Grid>
+        </ScrollViewer>
+      </PivotItem>
+      <PivotItem
+        Header="favoris">
+        <Grid>
+          <ListView
+            x:Name="FavoritesList"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="10, 0, 0, 0"
+            ItemsSource="{Binding FavoritesResponseElements}"
+            IsItemClickEnabled="True"
+            ItemClick="ListView_ItemClick">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <StackPanel
+                  Margin="0,0,0,9.5"
+                  Holding="StackPanel_Holding">
+                  <TextBlock
+                    Text="{Binding Name}"
+                    TextWrapping="NoWrap"
+                    Pivot.SlideInAnimationGroup="1"
+                    CommonNavigationTransitionInfo.IsStaggerElement="True"
+                    Style="{ThemeResource ListViewItemTextBlockStyle}"
+                    Margin="0,0,19,0">
+                  </TextBlock>
+                  <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                      <MenuFlyoutItem
+                        x:Uid="RemoveFavoriteFlyoutItem"
+                        Text="supprimer"
+                        Command="{Binding ElementName=FavoritesList, Path=DataContext.DeleteFavoriteCommand}"
+                        CommandParameter="{Binding}"
+                        Visibility="{Binding Path=ElementUrl, Converter={StaticResource IsStringNotNullToVisibilityConverter}}"/>
+                      <MenuFlyoutItem
+                        x:Uid="RemoveFavoriteFlyoutItem"
+                        Text="{Binding ElementName=FavoritesList, Path=DataContext.ToggleCurrentLocationPinText}"
+                        Command="{Binding ElementName=FavoritesList, Path=DataContext.ToggleCurrentLocationPinCommand}"
+                        CommandParameter="{Binding}"
+                        Visibility="{Binding Path=ElementUrl, Converter={StaticResource NotIsStringNotNullToVisibilityConverter}}" />
+                    </MenuFlyout>
+                  </FlyoutBase.AttachedFlyout>
+                </StackPanel>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </Grid>
+
+      </PivotItem>
+
+      <PivotItem
+        Header="recherche">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition
+              Height="Auto" />
+            <RowDefinition
+              Height="*" />
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition
+              Width="*" />
+            <ColumnDefinition
+              Width="Auto" />
+          </Grid.ColumnDefinitions>
+
+          <TextBox
+            Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+          <Button
+            Grid.Column="1"
+            Margin="5,0,0,0"
+            Command="{Binding SearchForecastCommand}">
+            chercher
+          </Button>
+
+          <ListView
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding SearchResponseElements}"
+            IsItemClickEnabled="True"
+            ItemClick="ListView_ItemClick">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <StackPanel
+                  Margin="0,0,0,9.5">
+                  <TextBlock
+                    Text="{Binding Name}"
+                    TextWrapping="Wrap"
+                    Pivot.SlideInAnimationGroup="1"
+                    CommonNavigationTransitionInfo.IsStaggerElement="True"
+                    Style="{ThemeResource BaseTextBlockStyle}"
+                    Margin="0,0,19,0">
+                  </TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </Grid>
+      </PivotItem>
+
+      <PivotItem
+        Header="extras">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition
+              Height="Auto" />
+          
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition
+              Width="*" />
+          </Grid.ColumnDefinitions>
+          
+          <ListView 
+            ItemsSource="{Binding AvailableExtras}"
+            IsItemClickEnabled="True"
+            ItemClick="ExtraLstViewItemClick">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock
+                  Text="{Binding Label}"
+                  Style="{ThemeResource ListViewItemTextBlockStyle}" />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+            
+          </ListView>
+        </Grid>
+      </PivotItem>
+    </Pivot>
+  </Grid>
+</common:BasePage>

@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8464D21-F3C9-407F-B22F-5886BCD5B440}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MeteoSkyWP</RootNamespace>
+    <AssemblyName>MeteoSkyWP</AssemblyName>
+    <DefaultLanguage>fr-FR</DefaultLanguage>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="SkiDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ForecastPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkiPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\StorageHelper.cs" />
+    <Compile Include="SkiDetailPage.xaml.cs">
+      <DependentUpon>SkiDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForecastPage.xaml.cs">
+      <DependentUpon>ForecastPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\BasePage.cs" />
+    <Compile Include="Common\BaseViewModel.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RootPage.xaml.cs">
+      <DependentUpon>RootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SkiPage.xaml.cs">
+      <DependentUpon>SkiPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ForecastTemplateSelector.cs" />
+    <Compile Include="Tools\IsFavoriteBoolToIconConverter.cs" />
+    <Compile Include="Tools\IsLongForecastBoolToIconConverter.cs" />
+    <Compile Include="Tools\IsPinnedBoolToIconConverter.cs" />
+    <Compile Include="Tools\IsStringNotNullToVisibilityConverter.cs" />
+    <Compile Include="Tools\TileHelper.cs" />
+    <Compile Include="ViewModels\ForecastPageViewModel.cs" />
+    <Compile Include="ViewModels\RootPageViewModel.cs" />
+    <Compile Include="ViewModels\SkiDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\SkiPageViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\customTile.xml" />
+    <Content Include="Assets\icons\averse_grele.gif" />
+    <Content Include="Assets\icons\averse_grele201110.gif" />
+    <Content Include="Assets\icons\averse_neige.gif" />
+    <Content Include="Assets\icons\averse_neige201110.gif" />
+    <Content Include="Assets\icons\averse_orage.gif" />
+    <Content Include="Assets\icons\averse_orage201110.gif" />
+    <Content Include="Assets\icons\averse_pluie.gif" />
+    <Content Include="Assets\icons\averse_pluie201110.gif" />
+    <Content Include="Assets\icons\averse_pluiefaible.gif" />
+    <Content Include="Assets\icons\averse_pluiefaible201110.gif" />
+    <Content Include="Assets\icons\averse_pluieneige.gif" />
+    <Content Include="Assets\icons\averse_pluieneige_201110.gif" />
+    <Content Include="Assets\icons\avserse_verglas.gif" />
+    <Content Include="Assets\icons\brouillard.gif" />
+    <Content Include="Assets\icons\cb.gif" />
+    <Content Include="Assets\icons\e.png" />
+    <Content Include="Assets\icons\ene.png" />
+    <Content Include="Assets\icons\grele.gif" />
+    <Content Include="Assets\icons\mitige.gif" />
+    <Content Include="Assets\icons\n.png" />
+    <Content Include="Assets\icons\ne.png" />
+    <Content Include="Assets\icons\neige.gif" />
+    <Content Include="Assets\icons\neige_201110.gif" />
+    <Content Include="Assets\icons\nne.png" />
+    <Content Include="Assets\icons\nno.png" />
+    <Content Include="Assets\icons\nuageux.gif" />
+    <Content Include="Assets\icons\o.png" />
+    <Content Include="Assets\icons\ono.png" />
+    <Content Include="Assets\icons\oragefaible.gif" />
+    <Content Include="Assets\icons\oso.png" />
+    <Content Include="Assets\icons\peu_nuageux.gif" />
+    <Content Include="Assets\icons\pluie.gif" />
+    <Content Include="Assets\icons\pluie_neige.gif" />
+    <Content Include="Assets\icons\pluie_neige_201110.gif" />
+    <Content Include="Assets\icons\s.png" />
+    <Content Include="Assets\icons\se.png" />
+    <Content Include="Assets\icons\so.png" />
+    <Content Include="Assets\icons\soleil.gif" />
+    <Content Include="Assets\icons\sondage.png" />
+    <Content Include="Assets\icons\sse.png" />
+    <Content Include="Assets\icons\sso.png" />
+    <Content Include="Assets\icons\verglas.gif" />
+    <Content Include="Assets\Logo.scale-240.png" />
+    <Content Include="Assets\MetroIcons\Black\chances_of_rain-256.png" />
+    <Content Include="Assets\MetroIcons\Black\chances_of_rain-26.png" />
+    <Content Include="Assets\MetroIcons\Black\chance_of_storm-256.png" />
+    <Content Include="Assets\MetroIcons\Black\chance_of_storm-26.png" />
+    <Content Include="Assets\MetroIcons\Black\cloud-256.png" />
+    <Content Include="Assets\MetroIcons\Black\cloud-26.png" />
+    <Content Include="Assets\MetroIcons\Black\clouds-256.png" />
+    <Content Include="Assets\MetroIcons\Black\clouds-26.png" />
+    <Content Include="Assets\MetroIcons\Black\cloud_lighting-256.png" />
+    <Content Include="Assets\MetroIcons\Black\cloud_lighting-26.png" />
+    <Content Include="Assets\MetroIcons\Black\fog_day-256.png" />
+    <Content Include="Assets\MetroIcons\Black\fog_day-26.png" />
+    <Content Include="Assets\MetroIcons\Black\fog_night-256.png" />
+    <Content Include="Assets\MetroIcons\Black\fog_night-26.png" />
+    <Content Include="Assets\MetroIcons\Black\hail-2-256.png" />
+    <Content Include="Assets\MetroIcons\Black\hail-256.png" />
+    <Content Include="Assets\MetroIcons\Black\hail-26.png" />
+    <Content Include="Assets\MetroIcons\Black\little_rain-256.png" />
+    <Content Include="Assets\MetroIcons\Black\little_rain-26.png" />
+    <Content Include="Assets\MetroIcons\Black\little_snow-256.png" />
+    <Content Include="Assets\MetroIcons\Black\little_snow-26.png" />
+    <Content Include="Assets\MetroIcons\Black\partly_cloudy_day-256.png" />
+    <Content Include="Assets\MetroIcons\Black\partly_cloudy_day-26.png" />
+    <Content Include="Assets\MetroIcons\Black\rain-2-256.png" />
+    <Content Include="Assets\MetroIcons\Black\rain-256.png" />
+    <Content Include="Assets\MetroIcons\Black\rain-26.png" />
+    <Content Include="Assets\MetroIcons\Black\sleet-2-256.png" />
+    <Content Include="Assets\MetroIcons\Black\sleet-2-26.png" />
+    <Content Include="Assets\MetroIcons\Black\sleet-256.png" />
+    <Content Include="Assets\MetroIcons\Black\sleet-26.png" />
+    <Content Include="Assets\MetroIcons\Black\small_clouds-256.png" />
+    <Content Include="Assets\MetroIcons\Black\small_clouds-26.png" />
+    <Content Include="Assets\MetroIcons\Black\snow-256.png" />
+    <Content Include="Assets\MetroIcons\Black\snow-26.png" />
+    <Content Include="Assets\MetroIcons\Black\snow_storm-2-256.png" />
+    <Content Include="Assets\MetroIcons\Black\snow_storm-256.png" />
+    <Content Include="Assets\MetroIcons\Black\snow_storm-26.png" />
+    <Content Include="Assets\MetroIcons\Black\storm-256.png" />
+    <Content Include="Assets\MetroIcons\Black\storm-26.png" />
+    <Content Include="Assets\MetroIcons\Black\summer-256.png" />
+    <Content Include="Assets\MetroIcons\Black\summer-26.png" />
+    <Content Include="Assets\MetroIcons\Black\sun-256.png" />
+    <Content Include="Assets\MetroIcons\Black\sun-26.png" />
+    <Content Include="Assets\MetroIcons\White\chances_of_rain-256.png" />
+    <Content Include="Assets\MetroIcons\White\chances_of_rain-26.png" />
+    <Content Include="Assets\MetroIcons\White\chance_of_storm-256.png" />
+    <Content Include="Assets\MetroIcons\White\chance_of_storm-26.png" />
+    <Content Include="Assets\MetroIcons\White\cloud-256.png" />
+    <Content Include="Assets\MetroIcons\White\cloud-26.png" />
+    <Content Include="Assets\MetroIcons\White\clouds-256.png" />
+    <Content Include="Assets\MetroIcons\White\clouds-26.png" />
+    <Content Include="Assets\MetroIcons\White\cloud_lighting-256.png" />
+    <Content Include="Assets\MetroIcons\White\cloud_lighting-26.png" />
+    <Content Include="Assets\MetroIcons\White\fog_day-256.png" />
+    <Content Include="Assets\MetroIcons\White\fog_day-26.png" />
+    <Content Include="Assets\MetroIcons\White\fog_night-256.png" />
+    <Content Include="Assets\MetroIcons\White\fog_night-26.png" />
+    <Content Include="Assets\MetroIcons\White\hail-2-256.png" />
+    <Content Include="Assets\MetroIcons\White\hail-256.png" />
+    <Content Include="Assets\MetroIcons\White\hail-26.png" />
+    <Content Include="Assets\MetroIcons\White\little_rain-256.png" />
+    <Content Include="Assets\MetroIcons\White\little_rain-26.png" />
+    <Content Include="Assets\MetroIcons\White\little_snow-256.png" />
+    <Content Include="Assets\MetroIcons\White\little_snow-26.png" />
+    <Content Include="Assets\MetroIcons\White\partly_cloudy_day-256.png" />
+    <Content Include="Assets\MetroIcons\White\partly_cloudy_day-26.png" />
+    <Content Include="Assets\MetroIcons\White\rain-2-256.png" />
+    <Content Include="Assets\MetroIcons\White\rain-256.png" />
+    <Content Include="Assets\MetroIcons\White\rain-26.png" />
+    <Content Include="Assets\MetroIcons\White\sleet-2-256.png" />
+    <Content Include="Assets\MetroIcons\White\sleet-2-26.png" />
+    <Content Include="Assets\MetroIcons\White\sleet-256.png" />
+    <Content Include="Assets\MetroIcons\White\sleet-26.png" />
+    <Content Include="Assets\MetroIcons\White\small_clouds-256.png" />
+    <Content Include="Assets\MetroIcons\White\small_clouds-26.png" />
+    <Content Include="Assets\MetroIcons\White\snow-256.png" />
+    <Content Include="Assets\MetroIcons\White\snow-26.png" />
+    <Content Include="Assets\MetroIcons\White\snow_storm-2-256.png" />
+    <Content Include="Assets\MetroIcons\White\snow_storm-256.png" />
+    <Content Include="Assets\MetroIcons\White\snow_storm-26.png" />
+    <Content Include="Assets\MetroIcons\White\storm-256.png" />
+    <Content Include="Assets\MetroIcons\White\storm-26.png" />
+    <Content Include="Assets\MetroIcons\White\summer-256.png" />
+    <Content Include="Assets\MetroIcons\White\summer-26.png" />
+    <Content Include="Assets\MetroIcons\White\sun-256.png" />
+    <Content Include="Assets\MetroIcons\White\sun-26.png" />
+    <Content Include="Assets\SmallLogo.scale-240.png" />
+    <Content Include="Assets\SplashScreen.scale-240.png" />
+    <Content Include="Assets\square150x150Tile.png" />
+    <Content Include="Assets\wide310x150Tile.png" />
+    <Content Include="Assets\Square71x71Logo.scale-240.png" />
+    <Content Include="Assets\StoreLogo.scale-240.png" />
+    <Content Include="Assets\WideLogo.scale-240.png" />
+    <None Include="Package.StoreAssociation.xml" />
+    <PRIResource Include="Strings\fr-FR\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en-US\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack-PCL">
+      <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\wpa81\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\wpa81\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MeteoSkyWP.Business\MeteoSkyWP.Business.csproj">
+      <Project>{702bf9a4-f046-4e57-8779-9a188d5a8ca4}</Project>
+      <Name>MeteoSkyWP.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeteSkyWPruntimeCompontent\MeteoSkyWPruntimeComponent.csproj">
+      <Project>{38bc596c-0697-4367-a0d1-d5cfd0223a52}</Project>
+      <Name>MeteoSkyWPruntimeComponent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NotificationsExtensions\NotificationsExtensions.csproj">
+      <Project>{6e87464b-b064-40ca-8161-7c18c337adff}</Project>
+      <Name>NotificationsExtensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetPlatformIdentifier)' == '' ">
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
