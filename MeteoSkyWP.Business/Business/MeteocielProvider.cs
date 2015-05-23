@@ -96,7 +96,7 @@ namespace MeteoSkyWP.Business
             var forecastSearchElements = new List<ForecastSearchResponseElement>();
             try
             {
-                string searchUrl = "prevville.php?action=getville&ville={0};";
+                string searchUrl = "prevville.php?action=getville&ville={0}";
                 string chosenUrl = null;
 
                 string htmlPage = string.Empty;
@@ -246,13 +246,7 @@ namespace MeteoSkyWP.Business
 
                                         var shortenUrl = currentForecastElement.WindDirUrl.Split('/').Last();
 
-                                        currentForecastElement.WindDirIconPath = string.Format("/Assets/icons/{0}", currentForecastElement.WeatherUrl.Split('/').Last());
-
-                                        if (IconMappings.ContainsKey(shortenUrl))
-                                        {
-                                            currentForecastElement.WindDirIconPath = string.Format("/Assets/MetroIcons/White/{0}", IconMappings[shortenUrl]);
-                                        }
-
+                                        currentForecastElement.WindDirIconPath = string.Format("/Assets/icons/{0}", currentForecastElement.WindDirUrl.Split('/').Last());
                                     }
                                     break;
                                 case ForecastColumnsEnum.WindAverage:
