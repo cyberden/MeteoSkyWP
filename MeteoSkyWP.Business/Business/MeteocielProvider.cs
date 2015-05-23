@@ -253,21 +253,11 @@ namespace MeteoSkyWP.Business
                                     {
                                         currentForecastElement.WindAverage = col.InnerText;
                                         currentForecastElement.WindColor = col.GetAttributeValue("bgcolor", "#000000");
-
-                                        if (currentForecastElement.WindAverage == "--")
-                                            currentForecastElement.WindAverageForegroundColor = "white";
-                                        else
-                                            currentForecastElement.WindAverageForegroundColor = "black";
                                     }
                                     break;
                                 case ForecastColumnsEnum.WindMax:
                                     {
                                         currentForecastElement.WindPeak = col.InnerText;
-
-                                        if (currentForecastElement.WindPeak == "--")
-                                            currentForecastElement.WindPeakForegroundColor = "white";
-                                        else
-                                            currentForecastElement.WindPeakForegroundColor = "black";
                                     }
                                     break;
                                 case ForecastColumnsEnum.Rain:

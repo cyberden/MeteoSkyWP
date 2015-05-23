@@ -102,6 +102,28 @@ namespace MeteoSkyWP.ViewModels
             }
         }
 
+        private Visibility _windVIsibility;
+        public Visibility WindVisibility
+        {
+            get { return _windVIsibility; }
+            set
+            {
+                _windVIsibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private Visibility _temperatureAndRainVIsibility;
+        public Visibility TemperatureAndRainVIsibility
+        {
+            get { return _temperatureAndRainVIsibility; }
+            set
+            {
+                _temperatureAndRainVIsibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private string _longForecastToggleButtonGlyph;
 
         public string LongForecastToggleButtonGlyph
@@ -154,6 +176,8 @@ namespace MeteoSkyWP.ViewModels
         public ICommand GoHomeCommand { get; private set; }
 
         public ICommand TogglePerHourViewCommand { get; private set; }
+
+        public ICommand ToggleWindVisibilityCommand { get; private set; }
         #endregion
 
         #region CTOR
@@ -164,6 +188,7 @@ namespace MeteoSkyWP.ViewModels
             TogglePinForecastCommand = new RelayCommand(TogglePinForecastExecute);
             GoHomeCommand = new RelayCommand(GoHomeExecute);
             TogglePerHourViewCommand = new RelayCommand(TogglePerHourViewExecute);
+            ToggleWindVisibilityCommand = new RelayCommand(ToggleWindVisibility);
         }
         #endregion
 
@@ -250,6 +275,9 @@ namespace MeteoSkyWP.ViewModels
             IsFavorite = favorites.Any(f => f.ElementUrl == url.Replace("tendances", "previsions"));
 
             var response = await new MeteocielProvider().GetForecast(url, IsHourDetail);
+            
+            WindVisibility = Visibility.Collapsed;
+            TemperatureAndRainVIsibility = Visibility.Visible;
 
             IsShowingLongForecast = response.IsLongForecast;
 
@@ -373,6 +401,12 @@ namespace MeteoSkyWP.ViewModels
             IsHourDetail = !IsHourDetail;
 
             await Initialize(this.Url);
+        }
+
+        public void ToggleWindVisibility(object parameter)
+        {
+            WindVisibility = WindVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            TemperatureAndRainVIsibility = TemperatureAndRainVIsibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
         #endregion
 

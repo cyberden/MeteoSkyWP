@@ -59,10 +59,6 @@ namespace MeteoSkyWP.DataModel
 
         public string WindColor { get; set; }
 
-        public string WindAverageForegroundColor { get; set; }
-
-        public string WindPeakForegroundColor { get; set; }
-
         public string TileWeatherIconPath { get; set; }
     }
 }
