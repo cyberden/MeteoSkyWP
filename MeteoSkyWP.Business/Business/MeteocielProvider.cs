@@ -244,9 +244,12 @@ namespace MeteoSkyWP.Business
                                         currentForecastElement.WindDir = img.GetAttributeValue("title", null);
                                         currentForecastElement.WindDirUrl = img.GetAttributeValue("src", null);
 
-                                        var shortenUrl = currentForecastElement.WindDirUrl.Split('/').Last();
+                                        if (currentForecastElement.WindDirUrl != null && currentForecastElement.WindDirUrl.Split('/').Any())
+                                        {
+                                            var shortenUrl = currentForecastElement.WindDirUrl.Split('/').Last();
 
-                                        currentForecastElement.WindDirIconPath = string.Format("/Assets/icons/{0}", currentForecastElement.WindDirUrl.Split('/').Last());
+                                            currentForecastElement.WindDirIconPath = string.Format("/Assets/icons/{0}", shortenUrl);
+                                        }
                                     }
                                     break;
                                 case ForecastColumnsEnum.WindAverage:
