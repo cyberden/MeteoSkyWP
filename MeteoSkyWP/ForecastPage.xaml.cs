@@ -54,7 +54,7 @@ namespace MeteoSkyWP
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (DefaultViewModel != null))
+            if (DefaultViewModel != null)
                 ((ForecastPageViewModel)DefaultViewModel).ToggleWindVisibilityCommand.Execute(sender);
         }
     }
