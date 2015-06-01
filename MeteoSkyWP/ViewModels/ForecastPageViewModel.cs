@@ -432,8 +432,7 @@ namespace MeteoSkyWP.ViewModels
                     var notifyTileFailed = false;
                     try
                     {
-                        throw new Exception();
-                        //ForecastTilesNotificationHelper.NotifyTile(tileId, currentElement, City);
+                        ForecastTilesNotificationHelper.NotifyTile(tileId, currentElement, City);
                     }
                     catch (Exception)
                     {
