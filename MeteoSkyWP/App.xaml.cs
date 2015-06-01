@@ -37,6 +37,7 @@ namespace MeteoSkyWP
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            this.UnhandledException += App_UnhandledException;
         }
 
         /// <summary>
@@ -191,6 +192,11 @@ namespace MeteoSkyWP
             }
 
             deferral.Complete();
+        }
+
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            // Save the dump here.
         }
 
         /// <summary>

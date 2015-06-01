@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
@@ -163,6 +164,8 @@ namespace MeteoSkyWP.ViewModels
 
         public bool ShowCurrentPositionForecast { get; set; }
 
+        public IAsyncOperation<IUICommand> CurrentMessageAsyncOperation { get; set; }
+
 
         #endregion
 
@@ -251,7 +254,7 @@ namespace MeteoSkyWP.ViewModels
             if (!forecastFound)
             {
                 var messageDialog = new MessageDialog(errorMessage);
-                messageDialog.Commands.Add(new UICommand("Fermer", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+                messageDialog.Commands.Add(new UICommand("Fermer", new UICommandInvokedHandler(this.GoHomeCommandInvokedHandler)));
                 messageDialog.DefaultCommandIndex = 0;
                 messageDialog.CancelCommandIndex = 0;
 
@@ -259,9 +262,14 @@ namespace MeteoSkyWP.ViewModels
             }
         }
 
-        private void CommandInvokedHandler(IUICommand command)
+        private void GoHomeCommandInvokedHandler(IUICommand command)
         {
             GoHomeExecute(null);
+        }
+        private void GoBackCommandInvokedHandler(IUICommand command)
+        {
+            if (CurrentMessageAsyncOperation != null)
+                CurrentMessageAsyncOperation.Cancel();
         }
 
 
@@ -275,7 +283,7 @@ namespace MeteoSkyWP.ViewModels
             IsFavorite = favorites.Any(f => f.ElementUrl == url.Replace("tendances", "previsions"));
 
             var response = await new MeteocielProvider().GetForecast(url, IsHourDetail);
-            
+
             WindVisibility = Visibility.Collapsed;
             TemperatureAndRainVIsibility = Visibility.Visible;
 
@@ -413,10 +421,37 @@ namespace MeteoSkyWP.ViewModels
         #region Tiles
         public void NotifyTile(string tileId)
         {
-            var elements = (ObservableCollection<ForecastElement>)ForecastElements.First().Item2;
-            var currentElement = elements.LastOrDefault(elt => elt.Time < DateTime.Now.TimeOfDay) ?? elements.First();
+            if (ForecastElements != null && ForecastElements.Any())
+            {
+                var elements = (ObservableCollection<ForecastElement>)ForecastElements.First().Item2;
 
-            ForecastTilesNotificationHelper.NotifyTile(tileId, currentElement, City);
+                if (elements != null)
+                {
+                    var currentElement = elements.LastOrDefault(elt => elt.Time < DateTime.Now.TimeOfDay) ?? elements.First();
+
+                    var notifyTileFailed = false;
+                    try
+                    {
+                        throw new Exception();
+                        //ForecastTilesNotificationHelper.NotifyTile(tileId, currentElement, City);
+                    }
+                    catch (Exception)
+                    {
+                        notifyTileFailed = true;
+                    }
+
+                    if (notifyTileFailed)
+                    {
+                        var messageDialog = new MessageDialog("Echec lors de l'actualisation de la tuile. Merci de l'enlever et l'ajouter à nouveau.");
+                        messageDialog.Commands.Add(new UICommand("Fermer", new UICommandInvokedHandler(this.GoBackCommandInvokedHandler)));
+                        messageDialog.DefaultCommandIndex = 0;
+                        messageDialog.CancelCommandIndex = 0;
+
+                        CurrentMessageAsyncOperation = messageDialog.ShowAsync();
+
+                    }
+                }
+            }
         }
         #endregion
     }
