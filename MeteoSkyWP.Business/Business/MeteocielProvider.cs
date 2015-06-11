@@ -174,7 +174,8 @@ namespace MeteoSkyWP.Business
 
                 //result.City = node.Descendants("tr").First(t => t.Attributes.Contains("class") && t.Attributes.Any(att => att.Name == "class" && att.Value == "titre_categorie")).ChildNodes[1].FirstChild.Descendants("b").First().InnerText.Split(new string[] { "ville" }, StringSplitOptions.None)[1].Trim();
 
-                var childNode = node.Descendants("td").First(t => t.Attributes.Contains("width") && t.Attributes.Any(att => att.Name == "width" && att.Value == "797")).ChildNodes[5].FirstChild;
+                var childNodes = node.Descendants("td").First(t => t.Attributes.Contains("width") && t.Attributes.Any(att => att.Name == "width" && att.Value == "797")).ChildNodes;
+                var childNode = childNodes[7].FirstChild;
 
                 if (childNode.ChildNodes.Count > 1)
                     result.Header = childNode.ChildNodes[1].InnerText;
