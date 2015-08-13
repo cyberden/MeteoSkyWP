@@ -174,15 +174,19 @@ namespace MeteoSkyWP.Business
 
                 //result.City = node.Descendants("tr").First(t => t.Attributes.Contains("class") && t.Attributes.Any(att => att.Name == "class" && att.Value == "titre_categorie")).ChildNodes[1].FirstChild.Descendants("b").First().InnerText.Split(new string[] { "ville" }, StringSplitOptions.None)[1].Trim();
 
-                var childNodes = node.Descendants("td").First(t => t.Attributes.Contains("width") && t.Attributes.Any(att => att.Name == "width" && att.Value == "797")).ChildNodes;
-                var childNode = childNodes[7].FirstChild;
+                var centerNode = node.Descendants("td").First(t => t.Attributes.Contains("width") && t.Attributes.Any(att => att.Name == "width" && att.Value == "797")).Descendants("center").First();
+                var childNode = centerNode.FirstChild;//[5].FirstChild;
 
                 if (childNode.ChildNodes.Count > 1)
                     result.Header = childNode.ChildNodes[1].InnerText;
                 else
                     result.Header = childNode.FirstChild.InnerText;
 
-                result.City = result.Header.Split(new string[] { "jours pour" }, StringSplitOptions.None)[1].Trim();
+                var splitStr = result.Header.Split(new string[] { "jours pour" }, StringSplitOptions.None);
+                if (splitStr.Length > 1)
+                    result.City = splitStr[1].Trim();
+                else
+                    result.City = splitStr[0].Trim();
 
                 result.TemperatureChartUrl = node.Descendants("img").First(t => t.Attributes.Contains("title") && t.Attributes.Any(att => att.Name == "title" && att.Value.ToLower().StartsWith("graphe des températures"))).GetAttributeValue("src", null);
 
