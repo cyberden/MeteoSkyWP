@@ -122,7 +122,7 @@ namespace MeteoSkyWP.Business
                     foreach (Match match in matches)
                         matchesLinks.Add(match.Value);
 
-                    var links = htmlDocument.DocumentNode.Descendants("a").Where(a => matchesLinks.Contains(a.Attributes["href"].Value));
+                    var links = htmlDocument.DocumentNode.Descendants("a").Where(a => a.Attributes.Contains("href") && matchesLinks.Contains(a.Attributes["href"].Value));
 
                     for (int i = 0; i < links.Count(); i++)
                     {
