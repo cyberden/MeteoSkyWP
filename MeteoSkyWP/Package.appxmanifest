@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="58387NimelStudio.MeteoSky" Publisher="CN=63CF883A-9C80-477E-AAF9-93BB25344799" Version="1.1.0.17" />
+  <Identity Name="58387NimelStudio.MeteoSky" Publisher="CN=63CF883A-9C80-477E-AAF9-93BB25344799" Version="1.1.0.18" />
   <mp:PhoneIdentity PhoneProductId="8d3c9086-f37b-4257-9196-e79e68a22af4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>MeteoSky</DisplayName>
