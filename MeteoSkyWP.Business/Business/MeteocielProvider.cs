@@ -104,7 +104,7 @@ namespace MeteoSkyWP.Business
                 // Appel à la page de recherche.
                 htmlPage = await GetStringAsync(RootUrl + string.Format(searchUrl, StringHelper.RemoveDiacritics(searchString.ToLower(), StringHelper.DictionaryDef.French)));
 
-                var reg = new Regex("previsions/\\d*/\\w*.htm");
+                var reg = new Regex("/previsions/\\d*/\\w*.htm");
                 var matches = reg.Matches(htmlPage);
 
                 // cas où on a directement trouvé la correspondance.
